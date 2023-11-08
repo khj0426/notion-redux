@@ -1,5 +1,5 @@
 export default function EditorTemplate (title, content) {
-  return `
+  return DOMPurify.sanitize(`
       <section class="editorContainer">   
         <input
           name="editorTitle"
@@ -13,5 +13,5 @@ export default function EditorTemplate (title, content) {
           </textarea>
         </div>
       </section>
-    `
+    `)
 }

@@ -11,7 +11,7 @@ const generateNestedDocumentsHTML = (documents) => {
     }
     html += '</ul>'
   }
-  return html
+  return DOMPurify.sanitize(html)
 }
 
 export { generateNestedDocumentsHTML }

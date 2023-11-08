@@ -2,7 +2,7 @@ export default function EditorChildListTemplate (documents) {
   if (!(documents instanceof Array)) {
     return ''
   }
-  return `
+  return DOMPurify.sanitize(`
         <ul>
             ${documents
               .map((docs) => {
@@ -10,5 +10,5 @@ export default function EditorChildListTemplate (documents) {
               })
               .join('')}
         </ul>
-    `
+    `)
 }

@@ -1,13 +1,13 @@
-import { initRouter } from './route.js';
-import DocumentEditPage from './Page/DocumentEditPage.js';
-import DocumentPage from './Page/DocumentPage.js';
-import NotFoundModal from './Component/NotFoundModal.js';
+import { initRouter } from './route.js'
+import DocumentEditPage from './Page/DocumentEditPage.js'
+import DocumentPage from './Page/DocumentPage.js'
+import NotFoundModal from './Component/NotFoundModal.js'
 
-export default function App({ $target, initalState }) {
+export default function App ({ $target, initalState }) {
   const documentPage = new DocumentPage({
     $target,
-    initalState,
-  });
+    initalState
+  })
 
   const documentEditPage = new DocumentEditPage({
     $target,
@@ -15,41 +15,40 @@ export default function App({ $target, initalState }) {
       documentId: 'new',
       document: {
         title: '',
-        content: '',
-      },
+        content: ''
+      }
     },
     onChangeEditorTitle: () => {
-      documentPage.render();
-    },
-  });
+      documentPage.render()
+    }
+  })
 
   const notFoundModal = new NotFoundModal({
-    $target,
-  });
+    $target
+  })
 
   this.route = () => {
-    const { pathname } = window.location;
-    documentPage.render();
-    notFoundModal.closeModal();
+    const { pathname } = window.location
+    documentPage.render()
+    notFoundModal.closeModal()
 
     if (pathname === '/') {
       documentEditPage.setState({
-        documentId: 'new',
-      });
-      return;
+        documentId: 'new'
+      })
+      return
     }
 
     if (pathname.includes('/documents/')) {
-      const [, , documentId] = pathname.split('/');
-      documentId && documentEditPage.setState({ documentId });
-      return;
+      const [, , documentId] = pathname.split('/')
+      documentId && documentEditPage.setState({ documentId })
+      return
     }
 
-    notFoundModal.showModal(pathname);
-    return;
-  };
+    notFoundModal.showModal(pathname)
+  }
 
-  this.route();
+  this.route()
 
-  initRouter(this.route);
+  initRouter(this.route)
 }

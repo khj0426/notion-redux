@@ -1,5 +1,5 @@
 export default function DocumentItemTemplate ({ documentId, documentTitle }) {
-  return `
+  return DOMPurify.sanitize(`
       <li data-id = ${documentId} class = "document">
       ${documentTitle}
       </li>
@@ -8,5 +8,5 @@ export default function DocumentItemTemplate ({ documentId, documentTitle }) {
       <button data-id = ${documentId} class = "documentDeleteBtn">X</button>
       <button data-id = ${documentId} class = "documentAddBtn">+</button>
       </span>
-    `
+    `)
 }
