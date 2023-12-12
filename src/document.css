@@ -43,13 +43,19 @@
 
 .documentPage {
   height: 100vh;
-  flex-grow: 0;
-  flex-shrink: 0;
-  flew-wrap: wrap;
   background: rgb(251, 251, 250);
   transition: box-shadow 300ms ease 0s;
   box-shadow: rgba(0, 0, 0, 0.024) -1px 0px 0px 0px inset;
   width: 15%;
+  min-width:200px;
+  z-index:1;
+  overflow:auto;
+}
+
+@media (max-width: 900px){
+  .documentPage{
+    min-width:100px;
+  }
 }
 
 .childList {

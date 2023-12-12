@@ -21,7 +21,7 @@
   "bugs": {
     "url": "https://github.com/prgrms-fe-devcourse/FEDC4-5_Project_Notion_VanillaJS/issues"
   },
-  "type":"module",
+  "type": "module",
   "homepage": "https://github.com/prgrms-fe-devcourse/FEDC4-5_Project_Notion_VanillaJS#readme",
   "devDependencies": {
     "eslint": "^8.44.0",
