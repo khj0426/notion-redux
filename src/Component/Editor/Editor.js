@@ -1,7 +1,8 @@
-import INIT_DOCUMENT from '../../constants/document.js';
-import EditorTemplate from '../Template/EditorTemplate.js';
-import EditorChildList from './EditorChildList.js';
-import EditorChildListTemplate from '../Template/EditorChildListTemplate.js';
+import INIT_DOCUMENT from '../../constants/document';
+import EditorTemplate from '../Template/EditorTemplate';
+import EditorChildList from './EditorChildList';
+import EditorChildListTemplate from '../Template/EditorChildListTemplate';
+import store from '../../store/store';
 
 export default function Editor({
   $target,
@@ -64,6 +65,7 @@ export default function Editor({
   };
 
   this.render = () => {
+    console.log(store);
     if (!this.state.isFirstRender) {
       const { title, content } = this.state;
       $editor.innerHTML = EditorTemplate(title, content || '');

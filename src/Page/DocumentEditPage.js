@@ -1,75 +1,75 @@
-import { updateDocument, fetchDocument } from '../api/Document/index.js'
-import INIT_DOCUMENT from '../constants/document.js'
-import Editor from '../Component/Editor/Editor.js'
-import EditorPreview from '../Component/Editor/EditorPreview.js'
-import convertMarkdownToHTML from '../utils/parseIntoMarkdown.js'
-import { DOCUMENT_DEBOUNCE_TIME } from '../constants/api.js'
+import { updateDocument, fetchDocument } from '../api/Document/index';
+import INIT_DOCUMENT from '../constants/document';
+import Editor from '../Component/Editor/Editor';
+import EditorPreview from '../Component/Editor/EditorPreview';
+import convertMarkdownToHTML from '../utils/parseIntoMarkdown';
+import { DOCUMENT_DEBOUNCE_TIME } from '../constants/api';
 
-export default function DocumentEditPage ({
+export default function DocumentEditPage({
   $target,
   initalState,
-  onChangeEditorTitle
+  onChangeEditorTitle,
 }) {
   this.editorProxy = new Proxy(this.state || initalState, {
-    set (target, props, { id, title, content, documents }) {
+    set(target, props, { id, title, content, documents }) {
       editor.setState({
         ...editor.state,
         id,
         title,
         content,
-        documents
-      })
-      editorPreview.setState(convertMarkdownToHTML(content))
-    }
-  })
+        documents,
+      });
+      editorPreview.setState(convertMarkdownToHTML(content));
+    },
+  });
 
-  const $page = document.createElement('div')
+  const $page = document.createElement('div');
 
-  this.state = initalState
+  this.state = initalState;
 
   this.setState = async (nextState) => {
     if (nextState.documentId === 'new') {
-      editor.setState(INIT_DOCUMENT)
-      return
+      editor.setState(INIT_DOCUMENT);
+      return;
     }
-    const { documentId } = nextState
+    const { documentId } = nextState;
 
     this.state = {
       ...this.state,
-      nextState
-    }
+      nextState,
+    };
 
-    const { id, title, content, documents } = await fetchDocument(documentId)
-    this.editorProxy.documents = { id, title, content, documents }
-  }
+    const { id, title, content, documents } = await fetchDocument(documentId);
+    this.editorProxy.documents = { id, title, content, documents };
+  };
 
   this.render = () => {
-    $target.appendChild($page)
-  }
+    $target.appendChild($page);
+  };
 
   const editorPreview = new EditorPreview({
     $target,
-    initalState: this.state.content || ''
-  })
+    initalState: this.state.content || '',
+  });
 
-  let timer = null
+  let timer = null;
   const editor = new Editor({
     $target,
     initalState: INIT_DOCUMENT,
     onEditing: (document) => {
-      const { content, id } = document
+      const { content, id } = document;
 
-      editorPreview.setState(convertMarkdownToHTML(content))
+      editorPreview.setState(convertMarkdownToHTML(content));
       if (id === INIT_DOCUMENT.id) {
-        return
+        return;
       }
       if (timer !== null) {
-        clearTimeout(timer)
+        clearTimeout(timer);
       }
       timer = setTimeout(async () => {
-        await updateDocument(document).catch((e) => alert(e))
-        onChangeEditorTitle()
-      }, DOCUMENT_DEBOUNCE_TIME)
-    }
-  })
+        await updateDocument(document).catch((e) => alert(e));
+        onChangeEditorTitle();
+      }, DOCUMENT_DEBOUNCE_TIME);
+    },
+  });
 }

@@ -1,26 +1,26 @@
-import { PAGE_CHANGE_TYPE, PAGE_CHANGE_EVENT_NAME } from './constants/route.js'
+import { PAGE_CHANGE_TYPE, PAGE_CHANGE_EVENT_NAME } from './constants/route';
 
 export const initRouter = (onRoute) => {
   window.addEventListener(PAGE_CHANGE_EVENT_NAME, (e) => {
-    const { nextURL, type } = e.detail
-    const { PUSH, REPLACE } = PAGE_CHANGE_TYPE
+    const { nextURL, type } = e.detail;
+    const { PUSH, REPLACE } = PAGE_CHANGE_TYPE;
 
     if (nextURL && type === PUSH) {
-      window.history.pushState(null, null, nextURL)
-      onRoute()
-      return
+      window.history.pushState(null, null, nextURL);
+      onRoute();
+      return;
     }
 
     if (nextURL && type === REPLACE) {
-      window.history.replaceState(null, null, nextURL)
-      onRoute()
+      window.history.replaceState(null, null, nextURL);
+      onRoute();
     }
-  })
+  });
 
   window.addEventListener('popstate', (e) => {
-    onRoute()
-  })
-}
+    onRoute();
+  });
+};
 
 export const customPush = (nextURL, type) => {
   window.dispatchEvent(
@@ -28,8 +28,8 @@ export const customPush = (nextURL, type) => {
       // type:push이거나 replace이거나
       detail: {
         nextURL,
-        type
-      }
+        type,
+      },
     })
-  )
-}
+  );
+};

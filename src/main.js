@@ -1,4 +1,4 @@
-import { default as App } from './App.js';
+import { default as App } from './App';
 import './editor.css';
 import './index.css';
 import './document.css';
