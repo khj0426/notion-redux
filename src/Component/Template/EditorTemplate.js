@@ -1,4 +1,4 @@
-export default function EditorTemplate (title, content) {
+export default function EditorTemplate(title, content) {
   return DOMPurify.sanitize(`
       <section class="editorContainer">   
         <input
@@ -11,7 +11,9 @@ export default function EditorTemplate (title, content) {
           <textarea name="editorContent" class="editorContent">
             ${content}
           </textarea>
+        
+          <div class = "editorChildList" />
         </div>
       </section>
-    `)
+    `);
 }

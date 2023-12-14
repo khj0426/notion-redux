@@ -3,7 +3,8 @@
   background: none;
   border: none;
   width: 15vw;
-  height: 100vh;
+  height: auto;
+  min-height:500px;
   resize: none;
   white-space: pre-wrap;
   outline-color: none;
@@ -11,8 +12,12 @@
 
 .editorContentWrapper {
   display: flex;
-  justify-content: space-between;
+  flex-direction:column;
   flex-wrap: wrap;
+}
+
+.editorChildList{
+  display:flex;
 }
 
 .editorContainer {

@@ -19,10 +19,6 @@ export default function Editor({
 
   $target.appendChild($editor);
 
-  this.setDependentState = ({ documents }) => {
-    editorChildList.setState(EditorChildListTemplate(documents) || []);
-  };
-
   this.setState = (nextState) => {
     const $editorTitle = $editor.querySelector('.editorTitle');
     const $editorContent = $editor.querySelector('.editorContent');
@@ -39,9 +35,22 @@ export default function Editor({
       $editorContent.value = content || '';
     }
 
-    this.setDependentState({ documents });
+    store.dispatch(
+      {
+        type: 'SET_EDITOR_CHILD',
+        payload: documents,
+      },
+      documents
+    );
 
     this.render();
+
+    const $editorChildList = document.createElement('div');
+    $editorChildList.innerHTML = EditorChildListTemplate(
+      store.getState().editorChildList
+    );
+
+    $editor.querySelector('.editorChildList').replaceChildren($editorChildList);
   };
 
   this.setEvent = () => {
@@ -65,7 +74,6 @@ export default function Editor({
   };
 
   this.render = () => {
-    console.log(store);
     if (!this.state.isFirstRender) {
       const { title, content } = this.state;
       $editor.innerHTML = EditorTemplate(title, content || '');
@@ -75,11 +83,6 @@ export default function Editor({
       });
     }
   };
-
-  const editorChildList = new EditorChildList({
-    $target: $editor,
-    initalState: [],
-  });
 
   this.setEvent();
 }
