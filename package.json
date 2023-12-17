@@ -2,8 +2,8 @@
   "dependencies": {
     "dompurify": "^3.0.6",
     "marked": "^5.1.0",
-    "redux": "^4.2.1",
-    "redux-saga": "^1.2.3",
+    "redux": "^5.0.0",
+    "redux-thunk": "^3.1.0",
     "serve": "^14.2.0"
   },
   "name": "fedc4-5_project_notion_vanillajs",
@@ -13,7 +13,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack serve",
-    "build": "webpack-w"
+    "build:dev": "webpack --config webpack.config.js --mode=development",
+    "build:prod": "webpack --config webpack.config.js --mode=production"
   },
   "repository": {
     "type": "git",
